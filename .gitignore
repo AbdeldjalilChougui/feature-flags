@@ -1,0 +1,24 @@
+# binaries
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+# data
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.aof
+*.rdb
+*.snap
+# env / secrets
+.env
+*.pem
+*.key
+# editors
+.idea/
+.vscode/
+*.swp
+/flagd
+flags.json
