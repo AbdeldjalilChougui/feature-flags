@@ -1,0 +1,37 @@
+{{define "head"}}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feature flags</title>
+<script src="/static/htmx.min.js"></script>
+<style>
+:root { --bg:#fff; --fg:#1d2330; --muted:#6b7280; --line:#e5e7eb; --accent:#0f766e; --on:#16a34a; --off:#9ca3af; --err:#b91c1c; --card:#f9fafb }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e6e8eb; --muted:#9aa4b2; --line:#2a313c; --accent:#2dd4bf; --on:#22c55e; --off:#4b5563; --err:#f87171; --card:#161b22 } }
+* { box-sizing:border-box }
+body { margin:0; font:15px/1.5 system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--fg) }
+header { padding:12px 16px; border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+header a.brand { font-weight:600; color:var(--fg); text-decoration:none }
+nav a { padding:3px 10px; border-radius:999px; text-decoration:none; color:var(--muted); border:1px solid var(--line) }
+nav a.cur { color:var(--bg); background:var(--accent); border-color:var(--accent) }
+main { max-width:1000px; margin:0 auto; padding:16px }
+a { color:var(--accent) }
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:16px }
+.wrap { overflow-x:auto }
+table { width:100%; border-collapse:collapse } th, td { text-align:left; padding:8px; border-bottom:1px solid var(--line); vertical-align:middle }
+th { color:var(--muted); font-weight:500; font-size:13px }
+input, textarea { font:inherit; padding:7px 10px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg) }
+textarea { width:100%; font:13px/1.4 ui-monospace,monospace; min-height:320px }
+button { font:inherit; padding:7px 14px; border:0; border-radius:6px; background:var(--accent); color:#fff; cursor:pointer }
+button.danger { background:var(--err) }
+.switch { width:46px; height:26px; border-radius:13px; padding:0; position:relative; background:var(--off) }
+.switch::after { content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:left .15s }
+.switch.on { background:var(--on) } .switch.on::after { left:23px }
+.muted { color:var(--muted) } .err { color:var(--err) } .ok { color:var(--on) }
+form.inline { display:flex; gap:8px; flex-wrap:wrap }
+code { font:13px ui-monospace,monospace }
+.grid { display:grid; grid-template-columns:2fr 1fr; gap:16px } @media (max-width:800px) { .grid { grid-template-columns:1fr } }
+</style>
+</head>
+<body>{{end}}
+{{define "foot"}}</body></html>{{end}}

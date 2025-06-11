@@ -1,0 +1,33 @@
+{{template "head"}}
+<header><a class="brand" href="/admin?env={{.Env}}">Feature flags</a>
+<nav>{{range .Envs}}<a href="/admin/flags/{{$.F.Key}}?env={{.Key}}" class="{{if eq .Key $.Env}}cur{{end}}">{{.Name}}</a> {{end}}</nav></header>
+<main>
+<h1><code>{{.F.Key}}</code></h1>
+<p class="muted">{{.F.Description}} · variants: <code>{{short .F.Variants}}</code></p>
+<div class="grid">
+<div class="card">
+<h2>Configuration in {{.Env}}</h2>
+<form hx-post="/admin/flags/{{.F.Key}}/config?env={{.Env}}" hx-target="#save-result">
+<textarea name="config" aria-label="environment configuration (JSON)">{{json .Config}}</textarea>
+<p><button type="submit">Save</button></p>
+<div id="save-result" aria-live="polite"></div>
+</form>
+<p class="muted">Rules run in order; the first whose clauses all match decides. Operators: {{.Ops}}.
+Rollout weights are basis points and must add up to 10000.</p>
+</div>
+<div>
+<div class="card">
+<h2>Try it</h2>
+<form hx-post="/admin/flags/{{.F.Key}}/test?env={{.Env}}" hx-target="#test-result">
+<textarea name="context" style="min-height:120px" aria-label="evaluation context (JSON)">{"key": "user-42", "country": "DZ"}</textarea>
+<p><button type="submit">Evaluate</button></p>
+</form>
+<div id="test-result" aria-live="polite"></div>
+</div>
+<div class="card">
+<button class="danger" hx-post="/admin/flags/{{.F.Key}}/delete?env={{.Env}}" hx-confirm="Delete {{.F.Key}} in every environment?">Delete flag</button>
+</div>
+</div>
+</div>
+</main>
+{{template "foot"}}

@@ -1,0 +1,15 @@
+{{template "head"}}
+<header><a class="brand" href="/admin">Feature flags</a>
+<nav>{{range .Envs}}<a href="/admin?env={{.Key}}" class="{{if eq .Key $.Env}}cur{{end}}">{{.Name}}</a> {{end}}</nav>
+<span class="muted">version {{.Version}}</span></header>
+<main>
+<div class="card">
+<form class="inline" hx-post="/admin/flags?env={{.Env}}" hx-target="#flags" hx-swap="outerHTML" hx-on::after-request="if(event.detail.successful) this.reset()">
+<input name="key" placeholder="new-flag-key" required aria-label="flag key" pattern="[a-z0-9][a-z0-9_.\-]*">
+<input name="description" placeholder="description" aria-label="description" style="flex:1">
+<button type="submit">Create boolean flag</button>
+</form>
+</div>
+{{template "flags" .}}
+</main>
+{{template "foot"}}

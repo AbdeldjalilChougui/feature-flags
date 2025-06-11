@@ -1,0 +1,26 @@
+{{define "flags"}}
+<div id="flags">
+{{if .Error}}<p class="err">{{.Error}}</p>{{end}}
+<div class="wrap"><table>
+<tr><th>on</th><th>flag</th><th>serving</th><th></th></tr>
+{{range .Rows}}{{template "row" .}}{{else}}<tr><td colspan="4" class="muted">No flags yet.</td></tr>{{end}}
+</table></div>
+</div>
+{{end}}
+
+{{define "row"}}
+<tr id="row-{{.Flag.Key}}">
+<td><button class="switch {{if .Config.Enabled}}on{{end}}" role="switch" aria-checked="{{.Config.Enabled}}" aria-label="toggle {{.Flag.Key}}"
+  hx-post="/admin/flags/{{.Flag.Key}}/toggle?env={{.Env}}" hx-target="closest tr" hx-swap="outerHTML"></button></td>
+<td><a href="/admin/flags/{{.Flag.Key}}?env={{.Env}}"><code>{{.Flag.Key}}</code></a><br><span class="muted">{{.Flag.Description}}</span></td>
+<td>{{if .Config.Enabled}}{{.Summary}}{{else}}<span class="muted">off → {{.Config.OffVariant}}</span>{{end}}</td>
+<td class="muted">{{len .Flag.Variants}} variants</td>
+</tr>
+{{end}}
+
+{{define "notice"}}{{if .Error}}<p class="err">{{.Error}}</p>{{else}}<p class="ok">{{.OK}}</p>{{end}}{{end}}
+
+{{define "result"}}
+<p><strong>{{.Variant}}</strong> → <code>{{short .Value}}</code></p>
+<p class="muted">reason: {{.Reason.Kind}}{{if .Reason.RuleIndex}} (rule {{.Reason.RuleIndex}}){{end}}{{if .Reason.Rollout}}, percentage rollout{{end}}{{if .Reason.Error}} — {{.Reason.Error}}{{end}}</p>
+{{end}}
