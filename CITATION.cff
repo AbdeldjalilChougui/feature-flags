@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+type: software
+title: "feature-flags"
+abstract: "A small self-hosted feature-flag server with a Go SDK."
+authors:
+  - family-names: "Chougui"
+    given-names: "Abdeldjalil"
+version: "0.1.0"
+date-released: "2026-10-18"
+license: MIT
+repository-code: "https://github.com/AbdeldjalilChougui/feature-flags"
+url: "https://pkg.go.dev/github.com/AbdeldjalilChougui/feature-flags"
